@@ -14,7 +14,7 @@ void Game::init() {
 }
 
 void Game::process_input() {
-  if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+  if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
     Vector2 mouse_pos = GetMousePosition();
     Vector2 world_pos = GetScreenToWorld2D(mouse_pos, camera);
 
@@ -23,11 +23,11 @@ void Game::process_input() {
 
     if (mx >= 0 && mx < grid.width && my >= 0 && my < grid.height) {
       int index = my * grid.width + mx;
-      grid.cells[index].alive = 0;
+      grid.cells[index].alive = IsMouseButtonDown(MOUSE_BUTTON_LEFT) ? 0 : 4;
     }
   }
 
-  if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
+  if (IsMouseButtonDown(MOUSE_BUTTON_MIDDLE)) {
     Vector2 delta = GetMouseDelta();
     delta = Vector2Scale(delta, -1.0f / camera.zoom);
     camera.target = Vector2Add(camera.target, delta);

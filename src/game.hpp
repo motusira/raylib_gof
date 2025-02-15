@@ -12,7 +12,7 @@ class Game {
   Grid grid;
   bool pause{true};
   double prev_time;
-  double update_interval{0.5};
+  double update_interval{0.1};
   void init();
   void process_input();
   void draw();

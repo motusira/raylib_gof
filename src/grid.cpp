@@ -9,15 +9,21 @@ Grid::Grid() {
 }
 
 void Grid::draw() {
-  std::vector<Color> colors = {{5, 102, 141, 255},
-                               {2, 128, 144, 255},
-                               {0, 168, 150, 255},
-                               {2, 195, 154, 255},
-                               {240, 243, 189, 255}};
+  std::vector<Color> colors = {{8, 28, 21, 255},
+                               {82, 183, 136, 255},
+                               {149, 213, 178, 255},
+                               {183, 228, 199, 255},
+                               {216, 243, 220, 255}};
 
   for (int i = 0; i < cells.size(); i++) {
     DrawRectangle((i % width) * cell_size, (i / width) * cell_size, cell_size,
                   cell_size, colors[cells[i].alive]);
+  }
+  for (int i = 0; i < (width + 1) * cell_size; i += cell_size) {
+    DrawLine(i, 0, i, width * cell_size, LIGHTGRAY);
+  }
+  for (int j = 0; j < (height + 1) * cell_size; j += cell_size) {
+    DrawLine(0, j, height * cell_size, j, LIGHTGRAY);
   }
 }
 
@@ -53,9 +59,11 @@ void Grid::simulate() {
     int neib = check_neib(i);
 
     if (current_alive) {
-      cc[i].alive = (neib == 2 || neib == 3) ? 0 : 4;
+      cc[i].alive = (neib == 2 || neib == 3)
+                        ? 0
+                        : (cc[i].alive < 4 ? cc[i].alive + 1 : 4);
     } else {
-      cc[i].alive = (neib == 3) ? 0 : 4;
+      cc[i].alive = (neib == 3) ? 0 : (cc[i].alive < 4 ? cc[i].alive + 1 : 4);
     }
   }
   cells = cc;
