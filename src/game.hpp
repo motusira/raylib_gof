@@ -1,23 +1,16 @@
-#ifndef _GAME_HPP_
-#define _GAME_HPP_
+#ifndef __GAME_HPP__
+#define __GAME_HPP__
 
-#include <raylib.h>
+#include "screen.hpp"
 #include "grid.hpp"
 
 class Game {
-
-  int width{800};
-  int height{450};
-  Camera2D camera;
+  Screen screen;
   Grid grid;
-  bool pause{true};
-  double prev_time;
-  double update_interval{0.1};
   void init();
-  void process_input();
-  void draw();
+  void handle_input();
   void update();
-  void deinit();
+  void draw();
 
 public:
   void run();

@@ -5,7 +5,7 @@
 
 Grid::Grid() {
   cells.resize(width * height);
-  std::fill(cells.begin(), cells.end(), Cell{4});
+  std::fill(cells.begin(), cells.end(), 4);
 }
 
 void Grid::draw() {
@@ -17,7 +17,7 @@ void Grid::draw() {
 
   for (int i = 0; i < cells.size(); i++) {
     DrawRectangle((i % width) * cell_size, (i / width) * cell_size, cell_size,
-                  cell_size, colors[cells[i].alive]);
+                  cell_size, colors[cells[i]]);
   }
   for (int i = 0; i < (width + 1) * cell_size; i += cell_size) {
     DrawLine(i, 0, i, width * cell_size, LIGHTGRAY);
@@ -27,7 +27,7 @@ void Grid::draw() {
   }
 }
 
-bool Grid::is_alive(int pos) { return cells[pos].alive == 0; }
+bool Grid::is_alive(int pos) { return cells[pos] == 0; }
 
 int Grid::get_new_pos(int dx, int dy, int pos) {
   int new_x = (pos % width + dx) % width;
@@ -53,18 +53,53 @@ int Grid::check_neib(int pos) {
 }
 
 void Grid::simulate() {
-  std::vector<Cell> cc = cells;
+  std::vector<int> cc = cells;
   for (int i = 0; i < cells.size(); i++) {
-    bool current_alive = (cells[i].alive == 0);
+    bool current_alive = (cells[i] == 0);
     int neib = check_neib(i);
 
     if (current_alive) {
-      cc[i].alive = (neib == 2 || neib == 3)
+      cc[i] = (neib == 2 || neib == 3)
                         ? 0
-                        : (cc[i].alive < 4 ? cc[i].alive + 1 : 4);
+                        : (cc[i] < 4 ? cc[i] + 1 : 4);
     } else {
-      cc[i].alive = (neib == 3) ? 0 : (cc[i].alive < 4 ? cc[i].alive + 1 : 4);
+      cc[i] = (neib == 3) ? 0 : (cc[i] < 4 ? cc[i] + 1 : 4);
     }
   }
   cells = cc;
+}
+
+int Grid::get_width() {
+  return width * cell_size;
+}
+
+int Grid::get_height() {
+  return height * cell_size;
+}
+
+void Grid::handle_input(Camera2D &camera) {
+  if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) ||
+      IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
+    Vector2 mouse_pos = GetMousePosition();
+    Vector2 world_pos = GetScreenToWorld2D(mouse_pos, camera);
+
+    int mx = static_cast<int>(world_pos.x / cell_size);
+    int my = static_cast<int>(world_pos.y / cell_size);
+
+    if (mx >= 0 && mx < width && my >= 0 && my < height) {
+      int index = my * width + mx;
+      cells[index] = IsMouseButtonDown(MOUSE_BUTTON_LEFT) ? 0 : 4;
+    }
+  }
+
+  if (IsKeyPressed(KEY_SPACE)) {
+    pause = !pause;
+  }
+}
+
+void Grid::update() {
+  if (!pause && GetTime() - prev_time >= update_interval) {
+    this->simulate();
+    prev_time = GetTime();
+  }
 }
