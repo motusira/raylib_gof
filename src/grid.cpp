@@ -103,3 +103,11 @@ void Grid::update() {
     prev_time = GetTime();
   }
 }
+
+int Grid::get_cell_size() {
+  return cell_size;
+}
+
+void Grid::set_cell_size(int n) {
+  cell_size = n;
+}

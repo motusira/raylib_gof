@@ -3,8 +3,8 @@
 #include <raymath.h>
 
 void Screen::init() {
-  size.x = 800;
-  size.y = 600;
+  size.x = 800 * 2;
+  size.y = 600 * 2;
   InitWindow(size.x, size.y, "Game of life");
   SetWindowState(FLAG_WINDOW_RESIZABLE);
   SetTargetFPS(60);
@@ -65,10 +65,11 @@ void Screen::update(int width_limit, int height_limit) {
   }
 
   if (IsWindowResized()) {
-    size = {static_cast<float>(GetScreenWidth()), static_cast<float>(GetScreenHeight())};
+    size = {static_cast<float>(GetScreenWidth()),
+            static_cast<float>(GetScreenHeight())};
     camera.offset.x = size.x / 2;
     camera.offset.y = size.y / 2;
-    
+
     camera.target.x = Clamp(camera.target.x, 0, width_limit);
     camera.target.y = Clamp(camera.target.y, 0, height_limit);
   }
@@ -77,12 +78,22 @@ void Screen::update(int width_limit, int height_limit) {
 void Screen::draw_start() {
   BeginDrawing();
   ClearBackground(RAYWHITE);
+}
+
+void Screen::start_cam_mode() {
   BeginMode2D(camera);
 }
 
-void Screen::draw_end() {
+void Screen::end_cam_mode() {
   EndMode2D();
+}
+
+void Screen::draw_end() {
   EndDrawing();
+}
+
+Camera2D &Screen::share_camera() {
+  return camera;
 }
 
 void Screen::deinit() { CloseWindow(); }

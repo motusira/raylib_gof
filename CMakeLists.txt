@@ -11,12 +11,15 @@ set(SOURCES
     src/game.cpp
     src/grid.cpp
     src/screen.cpp
+    src/ui.cpp
 )
 
 set(HEADERS
     src/game.hpp
     src/grid.hpp
     src/screen.hpp
+    src/ui.hpp
+    src/raygui.h
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
