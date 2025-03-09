@@ -16,11 +16,13 @@ class Game {
   Grid g;
   Input_handler input_handler;
   UI ui;
+  bool pause = true;
   private:
   void init(void);
   void draw(void);
   void handle_input(void);
   void update(void);
+  void game_input(void);
 
 };
 

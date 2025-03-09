@@ -28,7 +28,7 @@ void UI::draw(const Vector2 &window_size, Grid &g) {
                NULL, &d, 1, 256);
   DrawText(TextFormat("Grid size: %.0f", d), viewport.x + 10, viewport.y + 140,
            20, BLACK);
-  if (g.get_cell_size() != (int)d) {
+  if (g.get_grid_size() != (int)d) {
     g.set_grid_size((int)d);
   }
   EndScissorMode();

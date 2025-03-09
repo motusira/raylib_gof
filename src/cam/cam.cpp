@@ -1,6 +1,6 @@
 #include "cam.hpp"
+#include "raylib.h"
 #include <raymath.h>
-#include <iostream>
 
 void Cam::init(const Vector2 &window_size) {
 
@@ -10,7 +10,7 @@ void Cam::init(const Vector2 &window_size) {
   camera.target = Vector2{0.0f, 0.0f};
   camera.offset = Vector2{viewport.width / 2.0f, viewport.height / 2.0f};
   camera.rotation = 0.0f;
-  camera.zoom = 0.2f;
+  camera.zoom = 0.2f; 
 
   
 }
@@ -40,4 +40,16 @@ void Cam::start_cam_mode() {
 void Cam::end_cam_mode() {
   EndScissorMode();
   EndMode2D();
+}
+
+void Cam::zoom_in() {
+  camera.zoom = Clamp(camera.zoom + 0.1f, 0.1f, 0.8f);
+}
+
+void Cam::zoom_out() {
+  camera.zoom = Clamp(camera.zoom - 0.1f, 0.1f, 0.8f);
+}
+
+Vector2 Cam::screen_to_world(Vector2 &pos) const {
+  return GetScreenToWorld2D(pos, camera);
 }

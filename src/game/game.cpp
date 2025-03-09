@@ -25,9 +25,10 @@ void Game::draw() {
   win.draw_end();
 }
 
-
 void Game::handle_input() {
   input_handler.camera_input(camera);
+  input_handler.grid_input(g, camera);
+  game_input();
 }
 
 void Game::update() {
@@ -37,4 +38,13 @@ void Game::update() {
     ui.update(win.get_size());
   }
   camera.update(g.get_cell_size() * g.get_grid_size());
+  if (!pause) {
+    g.update();
+  }
+}
+
+void Game::game_input() {
+  if (IsKeyPressed(KEY_SPACE)) {
+    pause = !pause;
+  }
 }
