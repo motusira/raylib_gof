@@ -10,9 +10,7 @@ void Cam::init(const Vector2 &window_size) {
   camera.target = Vector2{0.0f, 0.0f};
   camera.offset = Vector2{viewport.width / 2.0f, viewport.height / 2.0f};
   camera.rotation = 0.0f;
-  camera.zoom = 0.2f; 
-
-  
+  camera.zoom = 0.2f;
 }
 
 void Cam::update_after_resize(const Vector2 &window_size) {
@@ -22,7 +20,8 @@ void Cam::update_after_resize(const Vector2 &window_size) {
 
 void Cam::update(int grid_size) {
   if (!Vector2Equals(move_vec, Vector2Zero())) {
-    Vector2 delta = Vector2Scale(move_vec, GetFrameTime() / camera.zoom * speed);
+    Vector2 delta =
+        Vector2Scale(move_vec, GetFrameTime() / camera.zoom * speed);
     camera.target.x = Clamp(camera.target.x + delta.x, 0, grid_size);
     camera.target.y = Clamp(camera.target.y + delta.y, 0, grid_size);
   }
@@ -42,13 +41,9 @@ void Cam::end_cam_mode() {
   EndMode2D();
 }
 
-void Cam::zoom_in() {
-  camera.zoom = Clamp(camera.zoom + 0.1f, 0.1f, 0.8f);
-}
+void Cam::zoom_in() { camera.zoom = Clamp(camera.zoom + 0.1f, 0.1f, 0.8f); }
 
-void Cam::zoom_out() {
-  camera.zoom = Clamp(camera.zoom - 0.1f, 0.1f, 0.8f);
-}
+void Cam::zoom_out() { camera.zoom = Clamp(camera.zoom - 0.1f, 0.1f, 0.8f); }
 
 Vector2 Cam::screen_to_world(Vector2 &pos) const {
   return GetScreenToWorld2D(pos, camera);

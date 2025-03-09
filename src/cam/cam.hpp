@@ -4,7 +4,7 @@
 #include "raylib.h"
 
 class Cam {
-  public:
+public:
   void init(const Vector2 &window_size);
   void update_after_resize(const Vector2 &window_size);
   void update(int grid_size);
@@ -15,7 +15,8 @@ class Cam {
   void zoom_in(void);
   void zoom_out(void);
   Vector2 screen_to_world(Vector2 &pos) const;
-  private:
+
+private:
   Camera2D camera;
   Rectangle viewport;
   Vector2 move_vec = {0.0f, 0.0f};

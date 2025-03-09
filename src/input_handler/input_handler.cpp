@@ -27,15 +27,16 @@ void Input_handler::camera_input(Cam &camera) {
 
 void Input_handler::grid_input(Grid &g, const Cam &camera) {
   if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) ||
-        IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
-      Vector2 mouse_pos = GetMousePosition();
-      Vector2 world_pos = camera.screen_to_world(mouse_pos); 
+      IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
+    Vector2 mouse_pos = GetMousePosition();
+    Vector2 world_pos = camera.screen_to_world(mouse_pos);
 
-      int mx = static_cast<int>(world_pos.x / g.get_cell_size());
-      int my = static_cast<int>(world_pos.y / g.get_cell_size());
+    int mx = static_cast<int>(world_pos.x / g.get_cell_size());
+    int my = static_cast<int>(world_pos.y / g.get_cell_size());
 
-      if (mx >= 0 && mx < g.get_grid_size() && my >= 0 && my < g.get_grid_size()) {
-        g.invert_cell_state(mx, my);
-      }
+    if (mx >= 0 && mx < g.get_grid_size() && my >= 0 &&
+        my < g.get_grid_size()) {
+      g.invert_cell_state(mx, my);
     }
+  }
 }

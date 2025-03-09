@@ -5,10 +5,11 @@
 #include "../grid/grid.hpp"
 
 class Input_handler {
-  public:
+public:
   void camera_input(Cam &camera);
   void grid_input(Grid &g, const Cam &camera);
-  private:
+
+private:
 };
 
 #endif

@@ -21,9 +21,7 @@ void Window::update() {
           static_cast<float>(GetScreenHeight())};
 }
 
-bool Window::is_resized() {
-  return IsWindowResized();
-}
+bool Window::is_resized() { return IsWindowResized(); }
 
 void Window::draw_start() {
   BeginDrawing();

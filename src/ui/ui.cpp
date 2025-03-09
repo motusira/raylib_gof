@@ -6,11 +6,13 @@ void UI::init(const Vector2 &window_size) {
 }
 
 void UI::update(const Vector2 &window_size) {
-  viewport = {window_size.x * 2.0f / 3.0f, 0, window_size.x / 3.0f, window_size.y};
+  viewport = {window_size.x * 2.0f / 3.0f, 0, window_size.x / 3.0f,
+              window_size.y};
 }
 
 static void draw_slide_bar(const float x, const float y, const float width,
-                    const float height, float &val, const char *text, const float min, const float max) {
+                           const float height, float &val, const char *text,
+                           const float min, const float max) {
   GuiSliderBar((Rectangle){x, y, width, height}, NULL, NULL, &val, min, max);
   DrawText(TextFormat(text, val), x + 10, y + height + 10, 20, BLACK);
 }
