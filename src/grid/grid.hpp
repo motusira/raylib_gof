@@ -20,7 +20,8 @@ public:
   int count_neibs(int pos);
   void simulate(void);
   void update(void);
-  void invert_cell_state(int x, int y);
+  void set_cell_alive(int x, int y);
+  void set_cell_unalive(int x, int y);
 
 private:
   int grid_size = 64;

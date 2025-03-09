@@ -6,7 +6,7 @@
 
 class Input_handler {
 public:
-  void camera_input(Cam &camera);
+  void camera_input(Cam &camera, const int limit);
   void grid_input(Grid &g, const Cam &camera);
 
 private:

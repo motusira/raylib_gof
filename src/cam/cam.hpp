@@ -15,6 +15,8 @@ public:
   void zoom_in(void);
   void zoom_out(void);
   Vector2 screen_to_world(Vector2 &pos) const;
+  void move_by_delta(const Vector2 &delta, const int limit);
+  float get_zoom(void);
 
 private:
   Camera2D camera;

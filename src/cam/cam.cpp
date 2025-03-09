@@ -48,3 +48,10 @@ void Cam::zoom_out() { camera.zoom = Clamp(camera.zoom - 0.1f, 0.1f, 0.8f); }
 Vector2 Cam::screen_to_world(Vector2 &pos) const {
   return GetScreenToWorld2D(pos, camera);
 }
+
+void Cam::move_by_delta(const Vector2 &delta, const int limit) {
+  camera.target.x = Clamp(camera.target.x + delta.x, 0, limit);
+  camera.target.y = Clamp(camera.target.y + delta.y, 0, limit);
+}
+
+float Cam::get_zoom() { return camera.zoom; }

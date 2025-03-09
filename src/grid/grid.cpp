@@ -89,4 +89,6 @@ void Grid::update() {
   }
 }
 
-void Grid::invert_cell_state(int x, int y) { cells[x + y * grid_size] = 0; }
+void Grid::set_cell_alive(int x, int y) { cells[x + y * grid_size] = 0; }
+
+void Grid::set_cell_unalive(int x, int y) { cells[x + y * grid_size] = 4; }

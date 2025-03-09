@@ -26,7 +26,7 @@ void Game::draw() {
 }
 
 void Game::handle_input() {
-  input_handler.camera_input(camera);
+  input_handler.camera_input(camera, g.get_cell_size() * g.get_grid_size());
   input_handler.grid_input(g, camera);
   game_input();
 }
