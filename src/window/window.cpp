@@ -1,4 +1,5 @@
 #include "window.hpp"
+#include "raylib.h"
 
 void Window::init() {
   size.x = 1200;
@@ -7,6 +8,7 @@ void Window::init() {
   InitWindow(size.x, size.y, "Game of life");
   SetWindowState(FLAG_WINDOW_RESIZABLE);
   SetTargetFPS(60);
+  SetWindowMinSize(800, 600);
 
   size.x = GetMonitorWidth(GetCurrentMonitor()) / 2;
   size.y = GetMonitorHeight(GetCurrentMonitor()) / 2;

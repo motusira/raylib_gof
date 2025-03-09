@@ -11,11 +11,13 @@ public:
   void resize_grid(void);
   int get_grid_size(void);
   int get_cell_size(void);
+  double get_update_interval(void);
   void set_grid_size(int n);
   void set_cell_size(int n);
+  void set_update_interval(double n);
   bool is_alive(int pos);
   int get_new_pos(int dx, int dy, int pos);
-  int count_neibs(int pos); 
+  int count_neibs(int pos);
   void simulate(void);
   void update(void);
   void invert_cell_state(int x, int y);

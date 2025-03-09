@@ -13,8 +13,8 @@ void Grid::draw() {
                                {216, 243, 220, 255}};
 
   for (int i = 0; i < cells.size(); i++) {
-    DrawRectangle((i % grid_size) * cell_size, (i / grid_size) * cell_size, cell_size,
-                  cell_size, colors[cells[i]]);
+    DrawRectangle((i % grid_size) * cell_size, (i / grid_size) * cell_size,
+                  cell_size, cell_size, colors[cells[i]]);
   }
   for (int i = 0; i < (grid_size + 1) * cell_size; i += cell_size) {
     DrawLine(i, 0, i, grid_size * cell_size, LIGHTGRAY);
@@ -31,12 +31,16 @@ int Grid::get_cell_size() { return cell_size; }
 
 int Grid::get_grid_size() { return grid_size; }
 
+double Grid::get_update_interval() { return update_interval; }
+
 void Grid::set_grid_size(int n) {
   grid_size = n;
   resize_grid();
 }
 
 void Grid::set_cell_size(int n) { cell_size = n; }
+
+void Grid::set_update_interval(double n) { update_interval = n; }
 
 bool Grid::is_alive(int pos) { return cells[pos] == 0; }
 
@@ -85,6 +89,4 @@ void Grid::update() {
   }
 }
 
-void Grid::invert_cell_state(int x, int y) {
-    cells[x + y * grid_size] = 0;
-}
+void Grid::invert_cell_state(int x, int y) { cells[x + y * grid_size] = 0; }
