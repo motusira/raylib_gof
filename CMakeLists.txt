@@ -44,7 +44,7 @@ set(HEADERS
     src/raygui.h
 )
 
-set(CMAKE_CXX_FLAGS "-Wstrict-prototypes -Wall -Wextra -Wmissing-prototypes")
+set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 target_link_libraries(${PROJECT_NAME} raylib)
