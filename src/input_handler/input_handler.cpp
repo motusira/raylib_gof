@@ -10,6 +10,15 @@ void Input_handler::camera_input(Cam &camera, const int limit) {
     camera.zoom_in();
   }
 
+  float wheel = GetMouseWheelMove();
+  if (wheel != 0) {
+    if (wheel > 0.0) {
+      camera.zoom_in();
+    } else {
+      camera.zoom_out();
+    }
+  }
+
   if (IsMouseButtonDown(MOUSE_BUTTON_MIDDLE)) {
     Vector2 delta = GetMouseDelta();
     delta = Vector2Scale(delta, -1.0f / camera.get_zoom());
