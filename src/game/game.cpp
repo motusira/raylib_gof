@@ -21,7 +21,7 @@ void Game::draw() {
   camera.start_cam_mode();
   g.draw();
   camera.end_cam_mode();
-  ui.draw(win.get_size(), g);
+  ui.draw(g);
   win.draw_end();
 }
 

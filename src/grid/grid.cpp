@@ -27,6 +27,8 @@ void Grid::resize_grid() {
   std::fill(cells.begin(), cells.end(), 4);
 }
 
+void Grid::clear_grid() { std::fill(cells.begin(), cells.end(), 4); }
+
 int Grid::get_cell_size() { return cell_size; }
 
 int Grid::get_grid_size() { return grid_size; }

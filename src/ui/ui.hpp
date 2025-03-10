@@ -8,7 +8,7 @@ class UI {
 public:
   void init(const Vector2 &window_size);
   void update(const Vector2 &window_size);
-  void draw(const Vector2 &window_size, Grid &g);
+  void draw(Grid &g);
 
 private:
   Rectangle viewport;

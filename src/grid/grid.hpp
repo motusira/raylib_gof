@@ -9,6 +9,7 @@ public:
   void init(void);
   void draw(void);
   void resize_grid(void);
+  void clear_grid(void);
   int get_grid_size(void);
   int get_cell_size(void);
   double get_update_interval(void);
